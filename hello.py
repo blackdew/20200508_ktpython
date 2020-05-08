@@ -5,9 +5,10 @@ message = """
 """
 
 # 보낼사람의 이름과 이메일주소를 입력을 받는다.
-name = '이숙번'
-email = 'blackdew7@gmail.com'
+name = input("이름을 입력해 주세요.")
+email = input("이메일을 입력해 주세요.")
 
 # 메일 내용을 완성해서 출력한다.
 complete = message.format(name, email)
 print(complete)
+# send_email(complete, to=email)
