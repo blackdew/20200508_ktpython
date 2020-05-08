@@ -1,5 +1,13 @@
 import random
 
+def make_lottos():
+    lottos = []
+    while len(lottos) < 6:
+        new = random.randint(1, 46)
+        if new not in lottos:
+            lottos.append(new)
+    return lottos
+
 # vip message
 message_vip = """
 안녕하세요. {0}님, 파이썬 수업에 오신 걸 환영합니다.
@@ -27,20 +35,13 @@ name = input("이름을 입력해 주세요.")
 email = input("이메일을 입력해 주세요.")
 회원등급 = input("회원등급이 어떻게 되나요? (1. VIP / 2. 일반회원 / 3. 비회원)")
 
-# lottos를 만드는 부분
-lottos = []
-while len(lottos) < 6:
-    new = random.randint(1, 46)
-    if new not in lottos:
-        lottos.append(new)
-
 # 메일 내용을 완성해서 출력한다.
 if 회원등급 == '1':
-    complete = message_vip.format(name, email, lottos)
+    complete = message_vip.format(name, email, make_lottos())
 elif 회원등급 == '2':
-    complete = message1.format(name, email, lottos)
+    complete = message1.format(name, email, make_lottos())
 else:
-    complete = message2.format(name, lottos)
+    complete = message2.format(name, make_lottos())
 
 print(complete)
 # send_email(complete, to=email)
