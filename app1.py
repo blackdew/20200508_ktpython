@@ -56,4 +56,9 @@ def delete(title):
     # 메인으로 이동
     return redirect('/')
 
+@app.route('/login')
+def login():
+    template = get_template('login.html')
+    return template.format(menu=get_menu())
+
 app.run(port=5001)
