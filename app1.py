@@ -56,8 +56,29 @@ def delete(title):
     # 메인으로 이동
     return redirect('/')
 
-@app.route('/login')
+members = [
+    {'id': 'sookbun', 'pw': '123456', 'profile': 'developer'},
+    {'id': 'duru', 'pw': '1234', 'profile': 'engineer'}
+]
+
+@app.route('/login', methods=['get', 'post'])
 def login():
+    if request.method == 'POST':
+        userid = request.form.get('id')
+        pw = request.form.get('pw')
+
+        # 로그인 
+        user = None
+        for m in members:
+            if m['id'] == userid and m['pw'] == pw:
+                # success login
+                user = m
+                print('success')
+
+        if user is None:
+            # fail login
+            print('fail')
+
     template = get_template('login.html')
     return template.format(menu=get_menu())
 
