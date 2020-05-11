@@ -35,6 +35,6 @@ def html(title):
     with open(f"./content/{title}", 'r', encoding="utf8") as f:
         content = f.read()
 
-    return template.format(title, content)
+    return template.format(title, content, get_menu())
 
 app.run(port=5001)
