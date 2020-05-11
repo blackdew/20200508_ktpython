@@ -10,14 +10,20 @@ def get_template(filename):
         content = f.read()
     return content
 
-@app.route('/')
-def main():
+def get_menu():
     menus = []
     for filename in os.listdir('./content'):
         menus.append(f"<li><a href='/{filename}'>{filename}</a></li>")
+    return '\n'.join(menus)
+
+@app.route('/')
+def main():
+    # menus = []
+    # for filename in os.listdir('./content'):
+    #     menus.append(f"<li><a href='/{filename}'>{filename}</a></li>")
 
     template = get_template('index.html')
-    return template.format(menu='\n'.join(menus))
+    return template.format(menu=get_menu())
 
 # @app.route('/<path1>/<path2>')
 # def content(path1, path2):
