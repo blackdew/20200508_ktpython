@@ -14,28 +14,16 @@ def main():
     template = get_template('index.html')
     return template
 
-@app.route('/html')
-def html():
+# @app.route('/<path1>/<path2>')
+# def content(path1, path2):
+#     return f"{path1} {path2}"
+
+@app.route('/<title>')
+def html(title):
     template = get_template('template.html')
-    title = 'html'
-    with open("./content/html", 'r', encoding="utf8") as f:
+    with open(f"./content/{title}", 'r', encoding="utf8") as f:
         content = f.read()
-        
+
     return template.format(title, content)
-
-@app.route('/css')
-def css():
-    template = get_template('template.html')
-    return template.format('CSS', "CSS is ...")
-
-@app.route('/js')
-def js():
-    template = get_template('template.html')
-    return template.format('JS', "JS is ...")
-
-@app.route('/python')
-def python():
-    template = get_template('template.html')
-    return template.format('Python', "Python is ...")
 
 app.run(port=5001)
