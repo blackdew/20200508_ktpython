@@ -1,3 +1,4 @@
+import os
 from flask import Flask
 
 app = Flask(__name__, static_folder="static")
@@ -11,15 +12,12 @@ def get_template(filename):
 
 @app.route('/')
 def main():
-    import os
-    print(os.listdir('./content'))
     menus = []
     for filename in os.listdir('./content'):
         menus.append(f"<li><a href='/{filename}'>{filename}</a></li>")
-    print(menus)
 
     template = get_template('index.html')
-    return template
+    return template.format(menu='\n'.join(menus))
 
 # @app.route('/<path1>/<path2>')
 # def content(path1, path2):
