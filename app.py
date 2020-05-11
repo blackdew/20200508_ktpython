@@ -12,10 +12,10 @@ def index():
 
 @app.route('/html')
 def html():
-    f = open('./web/1.html', 'r', encoding='utf8')
+    f = open('./web/template.html', 'r', encoding='utf8')
     content = f.read()
     f.close()
-    return content
+    return content.format('HTML', 'HTML is..')
 
 @app.route('/css')
 def css():
