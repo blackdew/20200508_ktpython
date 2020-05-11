@@ -12,6 +12,16 @@ def index():
 
 @app.route('/html')
 def html():
-    return "HTML"
+    f = open('./web/1.html', 'r', encoding='utf8')
+    content = f.read()
+    f.close()
+    return content
+
+@app.route('/css')
+def css():
+    f = open('./web/2.html', 'r', encoding='utf8')
+    content = f.read()
+    f.close()
+    return content
 
 app.run()
