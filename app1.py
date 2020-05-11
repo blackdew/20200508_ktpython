@@ -54,7 +54,7 @@ def delete(title):
     # 해당 컨텐츠를 삭제를 하고 
     os.remove(f'./content/{title}')
     # 메인으로 이동
-    redirect('/')
+    return redirect('/')
 
 
 app.run(port=5001)
