@@ -11,6 +11,13 @@ def get_template(filename):
 
 @app.route('/')
 def main():
+    import os
+    print(os.listdir('./content'))
+    menus = []
+    for filename in os.listdir('./content'):
+        menus.append(f"<li><a href='/{filename}'>{filename}</a></li>")
+    print(menus)
+
     template = get_template('index.html')
     return template
 
