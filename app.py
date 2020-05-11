@@ -1,5 +1,7 @@
 from flask import Flask
 app = Flask(__name__)
+app.env = 'development'
+app.debug = True
 
 @app.route('/')
 def index():
@@ -7,5 +9,9 @@ def index():
     content = f.read()
     f.close()
     return content
+
+@app.route('/html')
+def html():
+    return "HTML"
 
 app.run()
