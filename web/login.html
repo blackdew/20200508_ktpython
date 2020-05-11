@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>WEB-Create</title>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="/static/style.css">
+    </head>
+    <body>
+        <h1><a href="/">WEB</a></h1>
+        <div id="container">
+            <ol>
+                {menu}
+            </ol>
+            <div>
+
+            <form action="/login" method="post">
+                <input type='text' name='id' placeholder="id"><br>
+                <input type='password' name='pw' placeholder="password"><br>
+                <input type='submit' value="로그인"><br>
+            </form>
+
+            </div>
+        </div>
+    </body>
+</html>

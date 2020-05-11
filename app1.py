@@ -56,5 +56,4 @@ def delete(title):
     # 메인으로 이동
     return redirect('/')
 
-
 app.run(port=5001)
