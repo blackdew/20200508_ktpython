@@ -40,7 +40,10 @@ def html(title):
 @app.route('/create', methods=['get', 'post'])
 def create():
     if request.method == 'POST':
-        print(111)
+        title = request.form.get('title')
+        content = request.form.get('descript')
+        with open(f'./content/{title}', 'w', encoding='utf8') as f:
+            f.write(content)
     else:
         print(222)
 
