@@ -3,30 +3,9 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-    return """
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>WEB-Python</title>
-        <meta charset="utf-8">
-        <link rel="stylesheet" href="style.css">
-    </head>
-    <body>
-        <h1><a href="index.html">WEB</a></h1>
-        <div id="container">
-            <ol>
-                <li><a href="1.html">html</a></li>
-                <li><a href="2.html">css</a></li>
-                <li><a href="3.html">js</a></li>
-                <li><a href="4.html">python</a></li>
-            </ol>
-            <div>
-                <h2>Welcome</h2>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo, voluptatem.
-            </div>    
-        </div>
-    </body>
-</html>
-"""
+    f = open('./web/index.html', 'r', encoding='utf8')
+    content = f.read()
+    f.close()
+    return content
 
 app.run()
