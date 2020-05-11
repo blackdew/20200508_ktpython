@@ -49,4 +49,12 @@ def create():
     template = get_template('create.html')
     return template.format(menu=get_menu())
 
+@app.route('/<title>/delete')
+def delete(title):
+    # 해당 컨텐츠를 삭제를 하고 
+    os.remove(f'./content/{title}')
+    # 메인으로 이동
+    redirect('/')
+
+
 app.run(port=5001)
