@@ -24,5 +24,4 @@ def css():
     template = get_template('template.html')
     return template.format('CSS', "CSS is ...")
 
-
 app.run(port=5001)
