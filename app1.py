@@ -1,5 +1,5 @@
 import os
-from flask import Flask
+from flask import Flask, request
 
 app = Flask(__name__, static_folder="static")
 app.env = 'development'
@@ -37,8 +37,13 @@ def html(title):
 
     return template.format(title, content, get_menu())
 
-@app.route('/create')
+@app.route('/create', methods=['get', 'post'])
 def create():
+    if request.method == 'POST':
+        print(111)
+    else:
+        print(222)
+
     template = get_template('create.html')
     return template.format(menu=get_menu())
 
