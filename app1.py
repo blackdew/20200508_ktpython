@@ -17,7 +17,11 @@ def main():
 @app.route('/html')
 def html():
     template = get_template('template.html')
-    return template.format('HTML', "HTML is ...")
+    title = 'html'
+    with open("./content/html", 'r', encoding="utf8") as f:
+        content = f.read()
+        
+    return template.format(title, content)
 
 @app.route('/css')
 def css():
