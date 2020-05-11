@@ -1,5 +1,5 @@
 import os
-from flask import Flask, request
+from flask import Flask, request, redirect
 
 app = Flask(__name__, static_folder="static")
 app.env = 'development'
@@ -44,8 +44,7 @@ def create():
         content = request.form.get('descript')
         with open(f'./content/{title}', 'w', encoding='utf8') as f:
             f.write(content)
-    else:
-        print(222)
+        return redirect(f'/{title}')
 
     template = get_template('create.html')
     return template.format(menu=get_menu())
