@@ -15,7 +15,9 @@ def tree(num):
     if not num.isnumeric():
         return "not number"
 
-    # request.form 어제 배운거 html form으로 부터 받을 때,
+    # (어제 배움) html form으로 부터 받을 때는 => request.form를 사용
+    # querystring 으로 부터 받을 때는 => request.args를 사용
+    print(request.args)
     print(request.args.get('order'))
 
     trees = []
