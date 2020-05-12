@@ -40,6 +40,22 @@ def word_count():
     result = ''
     if request.method == 'POST':
         result = request.form.get('text')
+        result = result.split(' ')
+
+        # 단어를 key로 하고, 갯수를 value로 하는 word_dict
+        word_dict = {}
+
+        # result로 부터 word를 하나씩 꺼내서 (반복)
+        for w in result:
+            # word_dict에 단어가 있는지 확인
+            if w not in word_dict:
+                # 없으면 word_dict에 "단어" key 와 "0" value 추가 
+                word_dict[w] = 0
+            
+            # word_dict의 '단어'에 +1
+            word_dict[w] += 1
+
+        result = str(word_dict)
 
     return template.format(result=result)
 
