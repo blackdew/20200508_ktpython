@@ -30,4 +30,17 @@ def tree(num):
 
     return '<br>'.join(trees)
 
+# 텍스트박스로 영어 텍스트를 입력받아서 
+# 그 안에 있는 단어들을 카운팅합니다.
+@app.route("/word_count", methods=['get', 'post'])
+def word_count():
+    with open('./web/word_count.html', 'r', encoding='utf8') as f:
+        template = f.read()
+
+    result = ''
+    if request.method == 'POST':
+        result = request.form.get('text')
+
+    return template.format(result=result)
+
 app.run()
