@@ -11,7 +11,7 @@ def index():
 
 @app.route('/wordcount', methods=['get', 'post'])
 def wordcount():
-    word_dict = ''
+    word_dict = {}
     if request.method == 'POST':
         # 문자열 전처리
         words = request.form.get('lyrics').strip().lower()

@@ -7,4 +7,8 @@
 <hr>
 
 <h2>result</h2>
-<div>{{ words }}</div>
+<ul>
+{% for k, v in words.items() %}
+    <li>{{ k }}: {{ v }}</li>
+{% endfor %}
+</ul>
