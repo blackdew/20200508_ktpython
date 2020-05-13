@@ -22,11 +22,12 @@ def wordcount():
 
         # 단어 카운트
         words = words.split(' ')
-        word_dict = {}
-        for w in words:
-            if w not in word_dict:
-                word_dict[w] = 0
-            word_dict[w] += 1
+        word_dict = {w: words.count(w) for w in set(words)}
+        # word_dict = {}
+        # for w in words:
+        #     if w not in word_dict:
+        #         word_dict[w] = 0
+        #     word_dict[w] += 1
 
     return render_template('word_count.html', words=word_dict)
 
