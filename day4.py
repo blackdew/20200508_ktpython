@@ -31,11 +31,15 @@ def wordcount(lang):
             # 한글의 경우 단어카운트
             words = request.form.get('lyrics').strip()
             words = kkma.nouns(words)
-            
+
             words = [(w, words.count(w)) for w in set(words)]
             words = sorted(words, key=lambda x: x[1], reverse=True)
 
     return render_template('word_count.html', 
                             words=words, lang=lang)
+
+@app.route('/requests')
+def req():
+    return "requests"
 
 app.run()
