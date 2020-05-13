@@ -23,6 +23,7 @@ def wordcount():
         # 단어 카운트
         words = words.split(' ')
         words = [(w, words.count(w)) for w in set(words)]
+        words = sorted(words, key=lambda x: x[1], reverse=True)
 
     return render_template('word_count.html', words=words)
 
