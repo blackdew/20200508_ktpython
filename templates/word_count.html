@@ -1,1 +1,10 @@
 <h1>word count</h1>
+<form action="/wordcount" method="post">
+    <p><textarea name="lyrics"></textarea></p>
+    <p><input type="submit"></p>
+</form>
+
+<hr>
+
+<h2>result</h2>
+<div>{{ words }}</div>
