@@ -40,6 +40,6 @@ def wordcount(lang):
 
 @app.route('/requests')
 def req():
-    return "requests"
+    return render_template("requests.html")
 
 app.run()
