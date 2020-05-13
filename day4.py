@@ -13,7 +13,11 @@ def index():
 def wordcount():
     words = ''
     if request.method == 'POST':
-        words = request.form.get('lyrics')
+        words = request.form.get('lyrics').strip().lower()
+        specials = set(words) - set('abcdefghijklmnopqrstuvwxyz ')
+
+        for s in specials:
+            words = words.replace(s, '')
 
     return render_template('word_count.html', words=words)
 
