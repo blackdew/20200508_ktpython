@@ -40,16 +40,16 @@ def wordcount(lang):
 
 @app.route('/requests', methods=['get', 'post'])
 def req():
+    links = []
     if request.method == 'POST':
         url = request.form.get('url')
 
         import requests
         res = requests.get(url)
 
-        return res.text.replace(
-            'https://t1.daumcdn.net/daumtop_chanel/op/20170315064553027.png',
-            'https://shop.kt.com/images/pc/kt_main/top_logo.png')
+        # url을 추출하세요. 
+        links = res.text
 
-    return render_template("requests.html")
+    return render_template("requests.html", links=links)
 
 app.run()
