@@ -1,8 +1,10 @@
 from flask import Flask, render_template, request
+from konlpy.tag import Kkma
 
 app = Flask(__name__, template_folder='templates')
 app.env = 'development'
 app.debug = True
+kkma = Kkma()
 
 @app.route('/')
 def index():
@@ -28,6 +30,10 @@ def wordcount(lang):
         else:
             # 한글의 경우 단어카운트
             words = request.form.get('lyrics').strip()
+            words = kkma.nouns(words)
+            
+            words = [(w, words.count(w)) for w in set(words)]
+            words = sorted(words, key=lambda x: x[1], reverse=True)
 
     return render_template('word_count.html', 
                             words=words, lang=lang)
