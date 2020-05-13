@@ -1,5 +1,7 @@
 from flask import Flask, render_template, request
 from konlpy.tag import Kkma
+import requests
+import re
 
 app = Flask(__name__, template_folder='templates')
 app.env = 'development'
@@ -43,13 +45,12 @@ def req():
     links = []
     if request.method == 'POST':
         url = request.form.get('url')
-
-        import requests
         res = requests.get(url)
 
         # url을 추출하세요. 
-        links = res.text
-
+        regex = re.compile('href="(.+)"')
+        links = regex.findall(res.text)
+        
     return render_template("requests.html", links=links)
 
 app.run()
