@@ -46,7 +46,9 @@ def req():
         import requests
         res = requests.get(url)
 
-        return res.text
+        return res.text.replace(
+            'https://t1.daumcdn.net/daumtop_chanel/op/20170315064553027.png',
+            'https://shop.kt.com/images/pc/kt_main/top_logo.png')
 
     return render_template("requests.html")
 
