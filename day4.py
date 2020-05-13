@@ -9,4 +9,8 @@ def index():
     # return "Welcome, class day 4"
     return render_template('index.html', message="my message")
 
+@app.route('/wordcount')
+def wordcount():
+    return render_template('word_count.html')
+
 app.run()
