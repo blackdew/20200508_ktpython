@@ -7,6 +7,6 @@ app.debug = True
 @app.route('/')
 def index():
     # return "Welcome, class day 4"
-    return render_template('index.html')
+    return render_template('index.html', message="my message")
 
 app.run()
