@@ -11,14 +11,23 @@ def index():
 
 @app.route('/wordcount', methods=['get', 'post'])
 def wordcount():
-    words = ''
+    word_dict = ''
     if request.method == 'POST':
+        # 문자열 전처리
         words = request.form.get('lyrics').strip().lower()
+        words = words.replace('\n', ' ')
         specials = set(words) - set('abcdefghijklmnopqrstuvwxyz ')
-
         for s in specials:
             words = words.replace(s, '')
 
-    return render_template('word_count.html', words=words)
+        # 단어 카운트
+        words = words.split(' ')
+        word_dict = {}
+        for w in words:
+            if w not in word_dict:
+                word_dict[w] = 0
+            word_dict[w] += 1
+
+    return render_template('word_count.html', words=word_dict)
 
 app.run()
