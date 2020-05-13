@@ -38,8 +38,16 @@ def wordcount(lang):
     return render_template('word_count.html', 
                             words=words, lang=lang)
 
-@app.route('/requests')
+@app.route('/requests', methods=['get', 'post'])
 def req():
+    if request.method == 'POST':
+        url = request.form.get('url')
+
+        import requests
+        res = requests.get(url)
+
+        return res.text
+
     return render_template("requests.html")
 
 app.run()
