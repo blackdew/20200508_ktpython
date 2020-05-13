@@ -1,4 +1,4 @@
-<h1>requests</h1>
+<h1>link 추출기</h1>
 <form action="/requests" method="post">
     <p><input type="text" name="url" placeholder="url"></p>
     <p><input type="submit"></p>
@@ -6,4 +6,8 @@
 
 <hr>
 
-<div>{{ links }}</div>
+<ol>
+    {% for link in links %}
+    <li>{{ link }}</li>
+    {% endfor %}
+</ol>
