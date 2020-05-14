@@ -4,10 +4,18 @@
     <input type="submit">
 </form>
 
+{% for ss in soup %}
 <hr>
-
-<h2>result</h2>
-
-{% for s in soup %}
-<p>{{ s }}</p>
+<h3>{{ loop.index }} 주전</h3>
+<div>
+    {% for s in ss %}
+    <ul>
+        <li><strong>{{ loop.index }}위</strong></li>
+        <li>제목: {{ s['title'] }}</li>
+        <li>평점: {{ s['rating'] }}</li>
+        <li>관객수: {{ s['visitors'] }}</li>
+        <li>개봉일: {{ s['opened'] }}</li>
+    </ul>
+    {% endfor %}
+</div>
 {% endfor %}
