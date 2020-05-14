@@ -2,6 +2,7 @@ from flask import Flask, render_template, request
 import re
 import requests
 from bs4 import BeautifulSoup
+from datetime import date, timedelta
 
 app = Flask(__name__, template_folder='templates')
 app.env = "development"
@@ -30,13 +31,11 @@ def movies():
         ) for tag in soup.select('.desc_boxthumb')]
         return movies
 
-    from datetime import date, timedelta
     weeks = request.form.get('weeks')
-    week_list = []
-    for i in range(int(weeks)):
-        week_list.append(date.today() - timedelta(weeks=i))
-    print(week_list)
-    movies = get_movies()
+    weeks = [date.today() - timedelta(weeks=i+1) 
+             for i in range(int(weeks))]
+
+    movies = [get_movies(w.strftime('%Y%m%d')) for w in weeks]
     return render_template('movies.html', soup=movies)
 
 app.run(port=5000)
