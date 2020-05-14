@@ -16,21 +16,28 @@ def movies():
     url = 'https://movie.daum.net/boxoffice/weekly'
     res = requests.get(url)
     soup = BeautifulSoup(res.content, 'html.parser')
-    soup = soup.select('.desc_boxthumb')
 
-    movies = []
-    for tag in soup:
-        title = tag.strong.a.get_text()
-        rating = tag.em.get_text()
-        text = tag.select('.list_state')[0].get_text()
-        visitors = re.findall('주간관객 (\d+)명', text)
-        opened = re.findall('([0-9\.]+) 개봉', text)
-        movies.append({
-            'title': title,
-            'rating': rating,
-            'visitors': visitors,
-            'opended': opened
-        })
+    movies = [dict(
+        title=tag.strong.a.get_text(),
+        rating=tag.em.get_text(),
+        visitors=re.findall('주간관객 (\d+)명', tag.get_text()),
+        opened=re.findall('([0-9\.]+) 개봉', tag.get_text()),
+    ) for tag in soup.select('.desc_boxthumb')]
+
+    # soup = soup.select('.desc_boxthumb')
+    # movies = []
+    # for tag in soup:
+    #     title = tag.strong.a.get_text()
+    #     rating = tag.em.get_text()
+    #     text = tag.select('.list_state')[0].get_text()
+    #     visitors = re.findall('주간관객 (\d+)명', text)
+    #     opened = re.findall('([0-9\.]+) 개봉', text)
+    #     movies.append({
+    #         'title': title,
+    #         'rating': rating,
+    #         'visitors': visitors,
+    #         'opended': opened
+    #     })
 
     return render_template('movies.html', soup=movies)
 
