@@ -1,3 +1,13 @@
+<h1>다음 인기 영화 목록 추출</h1>
+<form action="/movies" method="post">
+    <input type="text" name="weeks" placeholder="weeks">
+    <input type="submit">
+</form>
+
+<hr>
+
+<h2>result</h2>
+
 {% for s in soup %}
 <p>{{ s }}</p>
 {% endfor %}
