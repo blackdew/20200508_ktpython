@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, render_template
 import requests
 from bs4 import BeautifulSoup
 
@@ -15,6 +15,7 @@ def movies():
     url = 'https://movie.daum.net/boxoffice/weekly'
     res = requests.get(url)
     soup = BeautifulSoup(res.content, 'html.parser')
-    return str(soup.select('.desc_boxthumb'))
+    soup = soup.select('.desc_boxthumb')
+    return render_template('movies.html', soup=soup)
 
 app.run(port=5000)
