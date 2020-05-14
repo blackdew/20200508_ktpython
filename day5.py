@@ -16,6 +16,16 @@ def movies():
     res = requests.get(url)
     soup = BeautifulSoup(res.content, 'html.parser')
     soup = soup.select('.desc_boxthumb')
-    return render_template('movies.html', soup=soup)
+
+    movies = []
+    for tag in soup:
+        title = tag.stong.a.get_text()
+        rating = tag.em.get_text()
+        movies.append({
+            'title': title,
+            'rating': rating
+        })
+
+    return render_template('movies.html', soup=movies)
 
 app.run(port=5000)
