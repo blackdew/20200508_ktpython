@@ -49,7 +49,7 @@ def req():
         res = requests.get(url)
 
         # url을 추출하세요. 
-        regex = re.compile('href="(http[^"]+)"')
+        regex = re.compile("""href=["'](http["']+)["']""")
         links = regex.findall(res.text)
         
     return render_template("requests.html", links=links)
