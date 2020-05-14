@@ -11,37 +11,28 @@ app.debug = True
 def index():
     return "Welcome, class day 5"
 
-@app.route('/movies')
+@app.route('/movies', methods=['get', 'post'])
 def movies():
     if request.method == "GET":
         return render_template("movies.html")
 
-    url = 'https://movie.daum.net/boxoffice/weekly'
-    res = requests.get(url)
-    soup = BeautifulSoup(res.content, 'html.parser')
+    weeks = request.form.get('weeks')
 
-    movies = [dict(
-        title=tag.strong.a.get_text(),
-        rating=tag.em.get_text(),
-        visitors=re.findall('주간관객 (\d+)명', tag.get_text()),
-        opened=re.findall('([0-9\.]+) 개봉', tag.get_text()),
-    ) for tag in soup.select('.desc_boxthumb')]
+    def get_movies(week_date=''):
+        url = 'https://movie.daum.net/boxoffice/weekly'
+        query = {'startDate': week_date}
+        res = requests.get(url, params=query)
+        soup = BeautifulSoup(res.content, 'html.parser')
 
-    # soup = soup.select('.desc_boxthumb')
-    # movies = []
-    # for tag in soup:
-    #     title = tag.strong.a.get_text()
-    #     rating = tag.em.get_text()
-    #     text = tag.select('.list_state')[0].get_text()
-    #     visitors = re.findall('주간관객 (\d+)명', text)
-    #     opened = re.findall('([0-9\.]+) 개봉', text)
-    #     movies.append({
-    #         'title': title,
-    #         'rating': rating,
-    #         'visitors': visitors,
-    #         'opended': opened
-    #     })
+        movies = [dict(
+            title=tag.strong.a.get_text(),
+            rating=tag.em.get_text(),
+            visitors=re.findall('주간관객 (\d+)명', tag.get_text()),
+            opened=re.findall('([0-9\.]+) 개봉', tag.get_text()),
+        ) for tag in soup.select('.desc_boxthumb')]
+        return movies
 
+    movies = get_movies()
     return render_template('movies.html', soup=movies)
 
 app.run(port=5000)
