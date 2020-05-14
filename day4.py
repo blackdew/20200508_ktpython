@@ -32,7 +32,8 @@ def wordcount(lang):
         else:
             # 한글의 경우 단어카운트
             words = request.form.get('lyrics').strip()
-            words = kkma.nouns(words)
+            words = kkma.pos(words)
+            words = [w for w in words if w[1] in ['NNG', 'NNP']]
 
             words = [(w, words.count(w)) for w in set(words)]
             words = sorted(words, key=lambda x: x[1], reverse=True)
