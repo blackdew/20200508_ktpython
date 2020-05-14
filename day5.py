@@ -19,7 +19,7 @@ def movies():
 
     movies = []
     for tag in soup:
-        title = tag.stong.a.get_text()
+        title = tag.strong.a.get_text()
         rating = tag.em.get_text()
         movies.append({
             'title': title,
