@@ -15,6 +15,6 @@ def movies():
     url = 'https://movie.daum.net/boxoffice/weekly'
     res = requests.get(url)
     soup = BeautifulSoup(res.content, 'html.parser')
-    return str(soup)
+    return str(soup.select('.desc_boxthumb'))
 
 app.run(port=5000)
