@@ -16,8 +16,6 @@ def movies():
     if request.method == "GET":
         return render_template("movies.html")
 
-    weeks = request.form.get('weeks')
-
     def get_movies(week_date=''):
         url = 'https://movie.daum.net/boxoffice/weekly'
         query = {'startDate': week_date}
@@ -32,6 +30,12 @@ def movies():
         ) for tag in soup.select('.desc_boxthumb')]
         return movies
 
+    from datetime import date, timedelta
+    weeks = request.form.get('weeks')
+    week_list = []
+    for i in range(int(weeks)):
+        week_list.append(date.today() - timedelta(weeks=i))
+    print(week_list)
     movies = get_movies()
     return render_template('movies.html', soup=movies)
 
