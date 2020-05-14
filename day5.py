@@ -38,4 +38,5 @@ def movies():
     movies = [get_movies(w.strftime('%Y%m%d')) for w in weeks]
     return render_template('movies.html', soup=movies)
 
-app.run(port=5000)
+if __name__ == '__main__':
+    app.run(port=5000)
