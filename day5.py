@@ -1,4 +1,5 @@
 from flask import Flask, render_template
+import re
 import requests
 from bs4 import BeautifulSoup
 
@@ -21,9 +22,14 @@ def movies():
     for tag in soup:
         title = tag.strong.a.get_text()
         rating = tag.em.get_text()
+        text = tag.select('.list_state')[0].get_text()
+        visitors = re.findall('주간관객 (\d+)명', text)
+        opened = re.findall('([0-9\.]+) 개봉', text)
         movies.append({
             'title': title,
-            'rating': rating
+            'rating': rating,
+            'visitors': visitors,
+            'opended': opened
         })
 
     return render_template('movies.html', soup=movies)
