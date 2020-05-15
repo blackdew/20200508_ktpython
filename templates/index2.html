@@ -14,7 +14,8 @@
                 {% endfor %}
             </ol>
             <div>
-                <h2>Welcome</h2>
+                <h2>Welcome</h2> 
+                <p>{% if user %}{{ user }}{% else %}비회원{% endif %} 님 안녕하세요.</p>
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo, voluptatem.
             </div>    
         </div>
