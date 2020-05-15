@@ -23,6 +23,17 @@ def download(keyword):
     img_links = [tag.get('data-source') 
                  for tag in soup.select('img._img')]
 
+    # 디렉토리 생성
+    import os 
+    if not os.path.exists(f'static/download/{keyword}'):
+        os.makedirs(f'static/download/{keyword}')
+
+    # 다운로드
+    for i, link in enumerate(img_links):
+        res = requests.get(link)
+        with open(f'static/download/{keyword}/{i}.jpg', 'wb') as f:
+            f.write(res.content)
+
     return render_template('download.html', 
         keyword=keyword, img_links=img_links)
 
