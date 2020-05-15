@@ -40,8 +40,10 @@ def login():
     user = cursor.fetchone()
     if user:
         session['user'] = user
+        return redirect('/')
+    else:
+        return render_template('login.html', msg="로그인 정보를 확인하세요")
 
-    return redirect('/')
 
 @app.route('/logout')
 def logout():
