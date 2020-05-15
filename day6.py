@@ -2,14 +2,24 @@ from flask import Flask, render_template, request
 import os 
 import requests
 from bs4 import BeautifulSoup
+import pymysql
 
 app = Flask(__name__, template_folder='templates')
 app.env = 'development'
 app.debug = True
 
+db = pymysql.connect(
+    user='root',
+    passwd='',
+    db='web',
+    host='localhost',
+    charset='utf8',
+    cursorclass=pymysql.cursors.DictCursor
+)
+
 @app.route('/')
 def index():
-    return render_template('index.html')
+    return render_template('index2.html')
 
 @app.route('/download/<keyword>', methods=['get', 'post'])
 def download(keyword):
