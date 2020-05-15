@@ -34,12 +34,13 @@ def login():
     cursor = db.cursor()
     cursor.execute(f"""
         select id, name, profile from author
-        where name = '{{ request.form['userid'] }}'
+        where name = '{ request.form['userid'] }' and
+              password = SHA2('{ request.form['password'] }', 256)
     """)
     user = cursor.fetchone()
     if user:
         session['user'] = user
-        
+
     return redirect('/')
 
 @app.route('/logout')
