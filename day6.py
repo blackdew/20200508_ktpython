@@ -28,8 +28,8 @@ def index():
 
 @app.route('/login', methods=['get', 'post'])
 def login():
-    # if request.method == 'GET':
-    #     return render_template('login.html')
+    if request.method == 'GET':
+        return render_template('login.html')
 
     session['user'] = {'name': 'sookbun', 'profile': 'engineer'}
     return redirect('/')
