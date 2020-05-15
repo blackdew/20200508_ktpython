@@ -8,4 +8,10 @@ app.debug = True
 def index():
     return render_template('index.html')
 
+@app.route('/download/<keyword>')
+def download(keyword):
+    url = 'https://search.naver.com/search.naver'
+    query = dict(query=keyword)
+    return render_template('download.html')
+
 app.run()
