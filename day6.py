@@ -18,6 +18,8 @@ def download(keyword):
     res = requests.get(url, params=query)
     soup = BeautifulSoup(res.content, 'html.parser')
     soup = soup.select('img._img')
+    img_links = [tag.get('data-source') for tag in soup]
+    print(img_links)
 
     return render_template('download.html', soup=soup)
 
