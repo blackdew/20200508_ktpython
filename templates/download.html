@@ -1,6 +1,6 @@
-<h1>네이버 검색 이미지 다운로드</h1>
-<form action="/download" method="post">
-    <p><input type="text" name="keyword" placeholder="keyword"></p>
+<h1>네이버 검색 이미지 다운로드 - {{ keyword }}</h1>
+<form action="/download/{{ keyword }}" method="post">
+    <p><input type="submit" value='다운로드'></p>
 </form>
 
 <hr>
