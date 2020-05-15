@@ -2,6 +2,7 @@
 
 <hr>
 
-{% for tag in soup %}
-    <p>{{ tag }}</p>
+{% for link in img_links %}
+    <p>{{ link }}</p>
+    <p><img src='{{ link }}'></p>
 {% endfor %}
