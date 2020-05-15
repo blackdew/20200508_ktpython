@@ -15,7 +15,7 @@ def download(keyword):
     url = 'https://search.naver.com/search.naver'
     query = dict(where='image', sm='tab_jum', query=keyword)
 
-    res = requests.get(url, param=query)
+    res = requests.get(url, params=query)
     soup = BeautifulSoup(res.content, 'html.parser')
 
     return render_template('download.html', soup=soup)
