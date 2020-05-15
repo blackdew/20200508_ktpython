@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, session
 import os 
 import requests
 from bs4 import BeautifulSoup
@@ -7,6 +7,7 @@ import pymysql
 app = Flask(__name__, template_folder='templates')
 app.env = 'development'
 app.debug = True
+app.secret_key = 'sookbun'
 
 db = pymysql.connect(
     user='root',
@@ -21,7 +22,9 @@ db = pymysql.connect(
 def index():
     cursor = db.cursor()
     cursor.execute("select id, title from topic order by title desc")
-    return render_template('index2.html', menu=cursor.fetchall())
+    return render_template('index2.html', 
+                            menu=cursor.fetchall(),
+                            user=session.get('user'))
 
 @app.route('/download/<keyword>', methods=['get', 'post'])
 def download(keyword):
