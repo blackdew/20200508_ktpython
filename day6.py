@@ -26,6 +26,16 @@ def index():
                             menu=cursor.fetchall(),
                             user=session.get('user'))
 
+@app.route('/<cid>')
+def content(cid):
+    cursor = db.cursor()
+    cursor.execute(f"""
+        select id, title, description, created, author_id from topic
+        where id = '{ cid }'
+    """)
+    content = cursor.fetchone()
+    return render_template('template.html', content=content)
+
 @app.route('/login', methods=['get', 'post'])
 def login():
     if request.method == 'GET':
