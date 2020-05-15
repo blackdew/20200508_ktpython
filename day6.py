@@ -31,7 +31,15 @@ def login():
     if request.method == 'GET':
         return render_template('login.html')
 
-    session['user'] = {'name': 'sookbun', 'profile': 'engineer'}
+    cursor = db.cursor()
+    cursor.execute(f"""
+        select id, name, profile from author
+        where name = '{{ request.form['userid'] }}'
+    """)
+    user = cursor.fetchone()
+    if user:
+        session['user'] = user
+        
     return redirect('/')
 
 @app.route('/logout')
