@@ -1,4 +1,6 @@
 from flask import Flask, render_template
+import requests
+from bs4 import BeautifulSoup
 
 app = Flask(__name__, template_folder='templates')
 app.env = 'development'
@@ -11,7 +13,11 @@ def index():
 @app.route('/download/<keyword>')
 def download(keyword):
     url = 'https://search.naver.com/search.naver'
-    query = dict(query=keyword)
-    return render_template('download.html')
+    query = dict(where='image', sm='tab_jum', query=keyword)
+
+    res = requests.get(url, param=query)
+    soup = BeautifulSoup(res.content, 'html.parser')
+
+    return render_template('download.html', soup=soup)
 
 app.run()
