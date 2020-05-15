@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, session
+from flask import Flask, render_template, request, session, redirect
 import os 
 import requests
 from bs4 import BeautifulSoup
@@ -25,6 +25,14 @@ def index():
     return render_template('index2.html', 
                             menu=cursor.fetchall(),
                             user=session.get('user'))
+
+@app.route('/login', methods=['get', 'post'])
+def login():
+    if request.method == 'GET':
+        return render_template('login.html')
+
+    session['user'] = {'name': 'sookbun', 'profile': 'engineer'}
+    return redirect('/')
 
 @app.route('/download/<keyword>', methods=['get', 'post'])
 def download(keyword):
