@@ -18,12 +18,15 @@ db = pymysql.connect(
     cursorclass=pymysql.cursors.DictCursor
 )
 
-@app.route('/')
-def index():
+def get_menu():
     cursor = db.cursor()
     cursor.execute("select id, title from topic order by title desc")
+    return cursor.fetchall()
+
+@app.route('/')
+def index():
     return render_template('index2.html', 
-                            menu=cursor.fetchall(),
+                            menu=get_menu(),
                             user=session.get('user'))
 
 @app.route('/<cid>')
@@ -34,7 +37,9 @@ def content(cid):
         where id = '{ cid }'
     """)
     content = cursor.fetchone()
-    return render_template('template.html', content=content)
+    return render_template('template.html', 
+                            menu=get_menu(),
+                            content=content)
 
 @app.route('/login', methods=['get', 'post'])
 def login():
