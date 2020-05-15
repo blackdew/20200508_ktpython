@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request
+import os 
 import requests
 from bs4 import BeautifulSoup
 
@@ -24,9 +25,7 @@ def download(keyword):
                  for tag in soup.select('img._img')]
 
     # 디렉토리 생성
-    import os 
-    if not os.path.exists(f'static/download/{keyword}'):
-        os.makedirs(f'static/download/{keyword}')
+    os.makedirs(f'static/download/{keyword}', exist_ok=True)
 
     # 다운로드
     for i, link in enumerate(img_links):
