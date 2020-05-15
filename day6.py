@@ -28,10 +28,15 @@ def index():
 
 @app.route('/login', methods=['get', 'post'])
 def login():
-    if request.method == 'GET':
-        return render_template('login.html')
+    # if request.method == 'GET':
+    #     return render_template('login.html')
 
     session['user'] = {'name': 'sookbun', 'profile': 'engineer'}
+    return redirect('/')
+
+@app.route('/logout')
+def logout():
+    session.pop('user')
     return redirect('/')
 
 @app.route('/download/<keyword>', methods=['get', 'post'])
