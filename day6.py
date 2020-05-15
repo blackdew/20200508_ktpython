@@ -17,6 +17,7 @@ def download(keyword):
 
     res = requests.get(url, params=query)
     soup = BeautifulSoup(res.content, 'html.parser')
+    soup = soup.select('img._img')
 
     return render_template('download.html', soup=soup)
 
