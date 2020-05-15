@@ -19,7 +19,9 @@ db = pymysql.connect(
 
 @app.route('/')
 def index():
-    return render_template('index2.html')
+    cursor = db.cursor()
+    cursor.execute("select id, title from topic order by title desc")
+    return render_template('index2.html', menu=cursor.fetchall())
 
 @app.route('/download/<keyword>', methods=['get', 'post'])
 def download(keyword):
