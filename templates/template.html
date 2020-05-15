@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>WEB-Python</title>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="/static/style.css">
+    </head>
+    <body>
+        <h1><a href="/">WEB</a></h1>
+        <div id="container">
+            <ol>
+                {% for m in menu %}
+                    <li><a href="/{{ m['id'] }}">{{ m['title'] }}</a></li>
+                {% endfor %}
+            </ol>
+            <div>
+                <h2>{{ content['title'] }}</h2>
+                <small>{{ content['created'] }}</small>
+                {{ content['description'] }}
+            </div>    
+        </div>
+    </body>
+</html>
