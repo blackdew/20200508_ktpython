@@ -44,7 +44,6 @@ def login():
     else:
         return render_template('login.html', msg="로그인 정보를 확인하세요")
 
-
 @app.route('/logout')
 def logout():
     session.pop('user')

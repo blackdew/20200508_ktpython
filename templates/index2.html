@@ -15,7 +15,14 @@
             </ol>
             <div>
                 <h2>Welcome</h2> 
-                <p>{% if user %}{{ user }}{% else %}비회원{% endif %} 님 안녕하세요.</p>
+                <p>
+                    {% if user %}{{ user['name'] }}{% else %}비회원{% endif %} 님 안녕하세요.
+                    {% if user %}
+                        <a href="/logout">로그아웃하기</a>
+                    {% else %}
+                        <a href="/login">로그인하기</a>
+                    {% endif %}
+                </p>
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo, voluptatem.
             </div>    
         </div>
